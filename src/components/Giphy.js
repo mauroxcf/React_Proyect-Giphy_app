@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import Loader from './Loader';
 import PageError from './PageError';
+import RandomGifs from './RandomGifs';
 
 export default function Giphy() {
 
@@ -9,6 +10,7 @@ export default function Giphy() {
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
+  //const [offset, setOffset] = useState(0)
 
   useEffect(() => {
     //obtain the data of the API
@@ -21,71 +23,37 @@ export default function Giphy() {
         const results = await axios("https://api.giphy.com/v1/gifs/trending", {
           params: {
             api_key: "UwxgdX49ZZxFZjZ0TmfxJn7Xn6d9Hg2E",
-            limit: 10,
+            limit: 100,
           }
         },);
 
-        // this print its only for testing
-        console.log(results);
-        //set the get data in the state
-        setData(results.data.data)
         // set the state to false because whe already get the data
         setLoading(false)
+        return results.data;
 
       } catch (error) {
         setError(true)
-      }
+      } return 'error en el fetch';
     }
 
-    fetchData();
+    // setting data to send correctly to the component
+    fetchData().then( (res) => {
+      console.log('la respuesta es:')
+      console.log(res.data)
+      setData(res.data)
+    });
   }, []);
-
-  // this function render the gif obtained
-  const gifRender = () => {
-    //
-    if (loading) return <Loader />
-    return data.map(val => {
-      return (
-        <div key={val.id} className="gif">
-          <img alt="GIFs" src={val.images.fixed_height.url} />
-        </div>
-      )
-    })
-  }
-
-  /* const pickRandomGif = () => {
-    let gif;
-    let randomGifs = []
-
-    for(let i=0; i<9; i++){
-        let randomNumber = Math.floor(Math.random() * data.length)
-        randomGifs.push(randomNumber)
-    }
-
-    gif = randomGifs.map(random =>
-        <Gif url={!results ? 'Loading...' : `${results[random].images.fixed_height.url}`}
-              key={random.id} />
-    )
-  } */
-
-  const handleClick = (e) => {
-    e.preventDefault()
-    //pickRandomGif()
-
-  }
 
   // if there is a error, render the message error
   if (error) return <PageError />
+  if (loading) return <Loader />
 
   // this sections will render the Gifs, messages and button
   return (
     <div>
       <div className="text-center m-2 text-light">
         <h1>Hi There! here you can see the Trending Gifs of giphy</h1>
-        <button onClick={handleClick} className="btn btn-primary mx-2">Reload</button>
-      </div>
-      <div className="container gifs">
-        {gifRender()}
+        <RandomGifs data={data}/>
       </div>
     </div>
   )
