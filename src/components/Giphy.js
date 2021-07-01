@@ -23,7 +23,7 @@ export default function Giphy() {
         const results = await axios("https://api.giphy.com/v1/gifs/trending", {
           params: {
             api_key: "UwxgdX49ZZxFZjZ0TmfxJn7Xn6d9Hg2E",
-            limit: 100,
+            limit: 10,
           }
         },);
 
