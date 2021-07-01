@@ -22,11 +22,13 @@ export default function RandomGifs(props) {
   const pickRandomGif = () => {
     let randomGifs = []
 
+    // creating the randomizer numbers
     for(let i=0; i <= 9; i++){
         let randomNumber = Math.floor(Math.random() * allData.length)
         randomGifs.push(randomNumber)
     }
 
+    //render the gif using a random list of gifs
     gifs = randomGifs.map((random, index) =>
       <GifRender url={!allData ? 'Loading...' : `${allData[random].images.fixed_height.url}`}
       key={index} />
