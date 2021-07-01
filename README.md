@@ -10,6 +10,8 @@ https://api.giphy.com/v1/gifs/trending
 - UBUNTU 18 or above
 - NODE v14
 - NPM
+- AXIOS
+- REACT
 
 ### HOW TO USE
 
@@ -27,6 +29,9 @@ npm init -y
 npm start
 ```
 4. enjoy! click in the reload button to display other gifs
+
+IMPORTANT NOTE: dont forget that this is a react app, so you should install to all react dependencies
+using:  create-react-app
 .
 
 ### Autors ✒️

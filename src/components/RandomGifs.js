@@ -6,13 +6,21 @@ export default function RandomGifs(props) {
   let allData = props.data;
   const [gif, setGif] = useState([]);
   let gifs;
+  const limit = 10;
 
   //this function render the obtained gifs at the beginning
   const gifRender = () => {
-    return allData.map(val => {
+    /* return allData.map(val => {
       return (
-        <div key={val.id} className="gif">
-          <img alt="GIFs" src={val.images.fixed_height.url} />
+        <div key={val.id} className="gif m-1">
+          <img className="rounded" alt="GIFs" src={val.images.fixed_height.url} />
+        </div>
+      )
+    }) */
+    return allData.slice(0, limit).map(val => {
+      return (
+        <div key={val.id} className="gif m-1">
+          <img className="rounded" alt="GIFs" src={val.images.fixed_height.url} />
         </div>
       )
     })
@@ -34,6 +42,8 @@ export default function RandomGifs(props) {
       key={index} />
     )
     setGif(gifs)
+    //just for testing the new random gif array
+    console.log(gifs)
   }
 
   const handleClick = (e) => {

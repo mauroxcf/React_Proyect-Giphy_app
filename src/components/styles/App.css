@@ -1,19 +1,27 @@
 body {
-background-color: black;
+  background-color: black;
 }
 
 .gifs {
-margin: 0 auto;
-width: 80%;
-display: flex;
-flex-wrap: wrap;
-justify-content: center;
+  margin: 0 auto;
+  width: 80%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .gif {
-padding: 0 2px;
+  padding: 0 2px;
 }
 
 .loader {
-color: blue;
+  color: blue;
+}
+
+img:hover {
+  transform: scale(1.05);
+}
+
+img {
+  transition: transform .3s;
 }
